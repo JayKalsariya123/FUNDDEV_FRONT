@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './DeveloperForm.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 
 const DeveloperForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+    const { userType, firstname, lastname, username, email , password } = location.state;
   
   const steps = [
     { name: 'bio', label: 'Bio', type: 'textarea', optional: true },
@@ -32,9 +34,17 @@ const DeveloperForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Developer Form Submitted:', formData);
+    console.log('All Information:', {
+        userType,
+        firstname,
+        lastname,
+        username,
+        email,
+        password,
+        ...formData
+    });
     navigate('/MainPage');
-  };
+};
 
   const handleSkip = () => {
     handleNext();

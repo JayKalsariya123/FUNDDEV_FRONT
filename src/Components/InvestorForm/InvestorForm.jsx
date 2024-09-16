@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './InvestorForm.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 
 const InvestorForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+    const { userType, firstname, lastname, username, email , password } = location.state;
   const steps = [
     { name: 'firmName', label: 'Firm Name', type: 'text', optional: false },
     { name: 'investmentRangeMin', label: 'Investment Range (Min)', type: 'number', optional: false },
@@ -30,8 +32,16 @@ const InvestorForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Form Submitted:', formData);
-    navigate('/MainPage');
+    console.log('All Information:', {
+      userType,
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      ...formData
+  });
+  navigate('/MainPage');
   };
 
   const handleSkip = () => {

@@ -8,8 +8,9 @@ import Select from './Components/UserSelection/Select'
 import DeveloperForm from './Components/Dev_form/DeveloperForm';
 import EntrepreneurForm from "./Components/Entrepreneur/EntrepreneurForm";
 import InvestorForm from './Components/InvestorForm/InvestorForm';
-import MainPage from './Components/MAIN/MainPAge';
+import MainPage from './Components/MAIN/MainPage';
 import Dev_Profile from './Components/Dev_Profile/Dev_Profile'
+import Idea_form from './Components/Idea_Form/Idea_form'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Layout = () => {
@@ -26,6 +27,7 @@ const Layout = () => {
        <Route path="/investor" element={<InvestorForm />} />
        <Route path="/MainPage" element={<MainPage />} />
        <Route path="/Dev_Profile" element={<Dev_Profile />} />
+       <Route path="/Idea_form" element={<Idea_form />} />
       </Routes>
     </BrowserRouter>
 

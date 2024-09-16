@@ -10,7 +10,10 @@ const MainPage = () => {
     setSidebarOpen(!isSidebarOpen);
   };
   const handleProfileClick = () => {
-    navigate('/Dev_Profile');  // Navigate to the correct signup route
+    navigate('/Dev_Profile');  
+};
+  const handleIdeaClick = () => {
+    navigate('/Idea_form');  
 };
   const closeSidebar = () => {
     setSidebarOpen(false);
@@ -39,6 +42,7 @@ const MainPage = () => {
           <li><button onClick={handleProfileClick}>Profile</button></li>
           <li>Request</li>
           <li>Help and Support</li>
+          <li><button onClick={handleIdeaClick} >Upload Idea</button></li>
           <li className="logout">Logout</li>
         </ul>
       </div>

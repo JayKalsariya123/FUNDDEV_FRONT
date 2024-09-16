@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import './EntrepreneurForm.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation} from 'react-router-dom';
 
 const EntrepreneurForm = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+    const { userType, firstname, lastname, username, email , password } = location.state;
   const steps = [
     { name: 'companyName', label: 'Company Name', type: 'text', optional: false },
     { name: 'foundedDate', label: 'Founded Date', type: 'date', optional: false },
@@ -29,8 +31,16 @@ const EntrepreneurForm = () => {
   };
 
   const handleSubmit = () => {
-    console.log('Entrepreneur Form Submitted:', formData);
-    navigate('/MainPage');
+    console.log('All Information:', {
+      userType,
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      ...formData
+  });
+  navigate('/MainPage');
   };
 
   const handleSkip = () => {

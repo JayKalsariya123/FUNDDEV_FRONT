@@ -1,14 +1,23 @@
-/* General Styles */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f4f4f9;
   margin: 0;
   padding: 0;
+  color: #333;
 }
 
+/* Main Page Container */
 .main-page {
-  position: relative;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Navbar Styles */
@@ -72,6 +81,7 @@ body {
 .sidebar ul {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
 .sidebar ul li {
@@ -79,16 +89,35 @@ body {
   cursor: pointer;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   transition: background-color 0.3s ease;
+  display: flex;
+  align-items: center;
+  height: 50px;
 }
 
-.sidebar ul li:hover {
+.sidebar ul li button {
+  background: none;
+  color: inherit;
+  border: none;
+  width: 100%;
+  text-align: left;
+  font-size: inherit;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background-color 0.3s ease;
+  padding: 0;
+  height: 100%;
+}
+
+.sidebar ul li:hover, .sidebar ul li button:hover {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Logout button */
 .logout {
   position: absolute;
   bottom: 20px;
-  width: 100%;
+  width: 90%;
+  margin-left: 5%;
   text-align: center;
   font-weight: bold;
   background-color: #ff7e5f;
@@ -112,11 +141,11 @@ body {
   z-index: 1;
 }
 
-/* Content */
+/* Content Section */
 .content {
+  flex: 1;
   padding: 50px;
   text-align: center;
-  font-size: 22px;
 }
 
 .content h1 {
@@ -132,21 +161,50 @@ body {
   font-size: 18px;
   line-height: 1.5;
 }
-/* General Reset for Buttons */
-.sidebar ul li button {
-  background: none;
-  color: inherit;
+
+/* Styling for buttons inside content */
+.content button {
+  background-color: #ff7e5f;
+  color: white;
   border: none;
-  /* padding: 15px 20px; */
-  width: 100%;
-  text-align: left;
-  font-size: inherit;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
   cursor: pointer;
-  font-family: inherit;
   transition: background-color 0.3s ease;
 }
 
-/* Hover Effect for Buttons (Same as list items) */
-.sidebar ul li button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.content button:hover {
+  background-color: #feb47b;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 10px 20px;
+  }
+
+  .navbar-right ul {
+    gap: 20px;
+  }
+
+  .content h1 {
+    font-size: 36px;
+  }
+
+  .content p {
+    font-size: 16px;
+  }
+
+  .sidebar {
+    width: 200px;
+  }
+
+  .sidebar ul li {
+    padding: 12px 15px;
+  }
+
+  .logout {
+    padding: 8px 0;
+  }
 }

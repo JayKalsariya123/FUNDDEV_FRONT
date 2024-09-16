@@ -8,7 +8,7 @@ const StarterPage = () => {
 
     let answers = ["We aim to bridge the gap between entrepreneurs, investors, and developers by providing a platform where innovative ideas come to life.", "A collaborative ecosystem for visionaries, investors, and developers to work together on groundbreaking projects.", "Entrepreneurs can share their ideas, investors can back promising projects, and developers can bid on opportunities to build and earn.", "Entrepreneurs post ideas, investors fund them, and developers compete to bring them to reality.", "We provide a streamlined, transparent, and secure platform for innovation, collaboration, and growth.", "Any entrepreneur with a vision, investor looking for potential, or developer seeking work opportunities."];
     const handleSignupClick = () => {
-        navigate('/Signup');  // Navigate to the correct signup route
+        navigate('/Select');  // Navigate to the correct signup route
     };
     
     return (
