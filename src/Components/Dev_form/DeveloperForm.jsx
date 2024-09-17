@@ -5,7 +5,7 @@ import { useNavigate ,useLocation} from 'react-router-dom';
 const DeveloperForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { userType, firstname, lastname, username, email, password } = location.state;
+  const { userType, firstname, lastname, username, email, password } = location;
 
   const steps = [
     { name: 'bio', label: 'Bio', type: 'textarea', optional: true },

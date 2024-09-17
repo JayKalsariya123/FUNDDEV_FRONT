@@ -110,7 +110,12 @@ const ProfilePage = ({ user }) => {
   );
 };
 
-// App component that passes user data to ProfilePage
+//u have to add api endpont here to get info like this : 
+//the usertype field is the key for rendering so if capital or small sace thig happends 
+//then just change in the case thing 
+//store the api fetched data in user object 
+//u can change it but it will be easy coz i have designed it that way.
+
 const App = () => {
   const user = {
     availability: "Part-time",
