@@ -37,7 +37,7 @@ const EntrepreneurForm = () => {
       ...formData,
     });
     // Redirect to the main page after submission
-    navigate('/MainPage');
+    navigate(`/MainPage?userType=${userType}`);
   };
 
   const handleChange = (e) => {

@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './MainPage.css';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Link , useNavigate, useLocation } from 'react-router-dom';
 import Idea_Card from '../Idea_Card/Idea_Card';
 const MainPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // const [userType, setUserType] = useState('developer');
-  const userType = 'developer';
+  const [userType, setUserType] = useState('');
 
-  // useEffect(() => {
-    // Fetch the userType from location or an API endpoint
-    // For this example, let's assume userType is coming from location.state
-  //   if (location.state && location.state.userType) {
-  //     setUserType(location.state.userType);
-  //   }
-  // }, [location.state]);
+  //there is no need for an api for conditional rendrening here i have done it.
+
+  useEffect(() => {
+    // Parse the query parameters
+    const searchParams = new URLSearchParams(location.search);
+    const type = searchParams.get('userType');
+    
+    if (type) {
+      setUserType(type);
+    }
+  }, [location]);
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
@@ -59,7 +62,7 @@ const MainPage = () => {
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <ul>
           <li><button onClick={handleProfileClick}>Profile</button></li>
-          {userType === 'developer' || userType === 'entrepreneur' ? (
+          {userType === 'Developer' || userType === 'Entrepreneur' ? (
             <>
               <li><button onClick={handleIdeaClick}>Upload Idea</button></li>
               <li>Request</li>

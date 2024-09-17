@@ -2,22 +2,34 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from 'axios'
 import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 
 function Login() {    
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const navigate = useNavigate()
+    const location = useLocation();
 
+    const userType = location.state?.userType || '';
+  console.log(userType)
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post("http://localhost:3001/login", { email, password })
+        axios.post("", { email, password }) //url for checking data
         .then(result => {
             console.log(result)
+
+
+//important//
+
             if(result.data === "Success"){
-                navigate("/Select")
+                navigate(`/MainPage?userType=${userType}`);  //this is where u have to check for user
+
+
+
+
             }else{
-                navigate("/register")
+                navigate("/Signup")
                 alert("You are not registered to this service")
 
             }
@@ -63,7 +75,7 @@ function Login() {
                 </button>
                 </form>
                 <p>Don't have an account?</p>
-                <Link to="/register" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
+                <Link to="/signup" className="btn btn-default border w-100 bg-light rounded-0 text-decoration-none">
                     Sign Up
                 </Link>
             

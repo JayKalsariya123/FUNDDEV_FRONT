@@ -35,7 +35,7 @@ const InvestorForm = () => {
       password,
       ...formData
     });
-    navigate('/MainPage');
+    navigate(`/MainPage?userType=${userType}`);
   };
 
   const handleChange = (e) => {
