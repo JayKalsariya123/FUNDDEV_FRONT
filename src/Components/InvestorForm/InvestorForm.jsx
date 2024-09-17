@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import './InvestorForm.css';
-import { useNavigate ,useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const InvestorForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-    const { userType, firstname, lastname, username, email , password } = location.state;
+  const { userType, firstname, lastname, username, email, password } = location.state;
+
   const steps = [
     { name: 'firmName', label: 'Firm Name', type: 'text', optional: false },
     { name: 'investmentRangeMin', label: 'Investment Range (Min)', type: 'number', optional: false },
@@ -13,7 +14,7 @@ const InvestorForm = () => {
     { name: 'portfolioSize', label: 'Portfolio Size', type: 'number', optional: false },
     { name: 'preferredStages', label: 'Preferred Stages', type: 'select', options: ['Idea', 'Prototype', 'Early Stage', 'Growth', 'Mature'], optional: false },
     { name: 'preferredIndustries', label: 'Preferred Industries', type: 'text', optional: false },
-    { name: 'investmentHistory', label: 'Investment History', type: 'textarea', optional: false }, // You can modify this for object reference if needed
+    { name: 'investmentHistory', label: 'Investment History', type: 'textarea', optional: false },
     { name: 'bio', label: 'Bio', type: 'textarea', optional: true },
     { name: 'location', label: 'Location', type: 'text', optional: true },
     { name: 'website', label: 'Website', type: 'text', optional: true },
@@ -22,14 +23,7 @@ const InvestorForm = () => {
     { name: 'twitter', label: 'Twitter', type: 'text', optional: true }
   ];
 
-  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
-
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
 
   const handleSubmit = () => {
     console.log('All Information:', {
@@ -40,12 +34,8 @@ const InvestorForm = () => {
       email,
       password,
       ...formData
-  });
-  navigate('/MainPage');
-  };
-
-  const handleSkip = () => {
-    handleNext();
+    });
+    navigate('/MainPage');
   };
 
   const handleChange = (e) => {
@@ -68,8 +58,7 @@ const InvestorForm = () => {
     }
   };
 
-  const renderStep = () => {
-    const step = steps[currentStep];
+  const renderStep = (step) => {
     switch (step.type) {
       case 'textarea':
         return <textarea name={step.name} value={formData[step.name] || ''} onChange={handleChange} />;
@@ -94,25 +83,14 @@ const InvestorForm = () => {
   return (
     <div className="investor-form">
       <h2>Investor Information</h2>
-      <div className="form-step">
-        <label>{steps[currentStep].label}</label>
-        {renderStep()}
-      </div>
+      {steps.map(step => (
+        <div key={step.name} className="form-step">
+          <label>{step.label}</label>
+          {renderStep(step)}
+        </div>
+      ))}
       <div className="form-buttons">
-        {currentStep < steps.length - 1 ? (
-          <>
-            <button onClick={handleSkip}>Skip</button>
-            <button onClick={handleNext}>Next</button>
-          </>
-        ) : (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
-      </div>
-      <div className="progress-bar">
-        <div
-          className="progress"
-          style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-        />
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );

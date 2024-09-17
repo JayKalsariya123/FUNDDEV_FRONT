@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './MainPage.css';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import Idea_Card from '../Idea_Card/Idea_Card';
 const MainPage = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const [userType, setUserType] = useState('developer');
+  const userType = 'developer';
+
+  // useEffect(() => {
+    // Fetch the userType from location or an API endpoint
+    // For this example, let's assume userType is coming from location.state
+  //   if (location.state && location.state.userType) {
+  //     setUserType(location.state.userType);
+  //   }
+  // }, [location.state]);
+
   const [isSidebarOpen, setSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
+
   const handleProfileClick = () => {
     navigate('/Dev_Profile');  
-};
+  };
+
+  const handlesupportClick = () => {
+    navigate('/helpandsupport');
+  };
+
   const handleIdeaClick = () => {
     navigate('/Idea_form');  
-};
+  };
+
   const closeSidebar = () => {
     setSidebarOpen(false);
   };
@@ -40,16 +59,19 @@ const MainPage = () => {
       <div className={`sidebar ${isSidebarOpen ? 'open' : ''}`}>
         <ul>
           <li><button onClick={handleProfileClick}>Profile</button></li>
-          <li>Request</li>
-          <li>Help and Support</li>
-          <li><button onClick={handleIdeaClick} >Upload Idea</button></li>
+          {userType === 'developer' || userType === 'entrepreneur' ? (
+            <>
+              <li><button onClick={handleIdeaClick}>Upload Idea</button></li>
+              <li>Request</li>
+            </>
+          ) : null}
+          <li><button onClick={handlesupportClick}>Help and Support</button></li>
           <li className="logout">Logout</li>
         </ul>
       </div>
 
       <div className="content">
-        <h1>Welcome to the Main Page</h1>
-        <p>This is the main oage of our</p>
+          <Idea_Card />
       </div>
     </div>
   );

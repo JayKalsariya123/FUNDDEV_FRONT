@@ -19,12 +19,10 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3001/register", { firstname, lastname, username, email, password })
-            .then(result => {
-                console.log(result);
-                navigate(`/${userType}`, { state: { userType, firstname, lastname, username, email, password } });
-            })
-            .catch(err => console.log(err));
+
+        navigate(`/${userType}`, { state: { userType, firstname, lastname, username, email, password } });
+
+
     }
 
     return (

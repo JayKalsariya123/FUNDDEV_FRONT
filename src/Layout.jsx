@@ -11,6 +11,7 @@ import InvestorForm from './Components/InvestorForm/InvestorForm';
 import MainPage from './Components/MAIN/MainPage';
 import Dev_Profile from './Components/Dev_Profile/Dev_Profile'
 import Idea_form from './Components/Idea_Form/Idea_form'
+import HelpAndSupport from './Components/HELP_AND_SUPPORT/HelpAndSupport';
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 const Layout = () => {
@@ -28,6 +29,7 @@ const Layout = () => {
        <Route path="/MainPage" element={<MainPage />} />
        <Route path="/Dev_Profile" element={<Dev_Profile />} />
        <Route path="/Idea_form" element={<Idea_form />} />
+       <Route path="/helpandsupport" element={<HelpAndSupport />} />
       </Routes>
     </BrowserRouter>
 

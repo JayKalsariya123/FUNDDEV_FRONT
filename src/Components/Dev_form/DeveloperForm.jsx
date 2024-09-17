@@ -5,8 +5,8 @@ import { useNavigate ,useLocation} from 'react-router-dom';
 const DeveloperForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-    const { userType, firstname, lastname, username, email , password } = location.state;
-  
+  const { userType, firstname, lastname, username, email, password } = location.state;
+
   const steps = [
     { name: 'bio', label: 'Bio', type: 'textarea', optional: true },
     { name: 'location', label: 'Location', type: 'text', optional: true },
@@ -21,33 +21,22 @@ const DeveloperForm = () => {
     { name: 'hourlyRate', label: 'Hourly Rate ($)', type: 'number', optional: false },
     { name: 'remote', label: 'Remote Work', type: 'checkbox', optional: false },
     { name: 'portfolio', label: 'Portfolio (Title, Description, Link)', type: 'text', optional: true },
-    { name: 'resume', label: 'Upload Resume', type: 'file', optional: false }
+    
   ];
-  
-  const [currentStep, setCurrentStep] = useState(0);
-  const [formData, setFormData] = useState({});
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
+  const [formData, setFormData] = useState({});
 
   const handleSubmit = () => {
     console.log('All Information:', {
-        userType,
-        firstname,
-        lastname,
-        username,
-        email,
-        password,
-        ...formData
+      userType,
+      firstname,
+      lastname,
+      username,
+      email,
+      password,
+      ...formData
     });
     navigate('/MainPage');
-};
-
-  const handleSkip = () => {
-    handleNext();
   };
 
   const handleChange = (e) => {
@@ -70,8 +59,7 @@ const DeveloperForm = () => {
     }
   };
 
-  const renderStep = () => {
-    const step = steps[currentStep];
+  const renderStep = (step) => {
     switch (step.type) {
       case 'textarea':
         return <textarea name={step.name} value={formData[step.name] || ''} onChange={handleChange} />;
@@ -96,26 +84,17 @@ const DeveloperForm = () => {
   return (
     <div className="developer-form">
       <h2>Developer Information</h2>
-      <div className="form-step">
-        <label>{steps[currentStep].label}</label>
-        {renderStep()}
-      </div>
-      <div className="form-buttons">
-        {currentStep < steps.length - 1 ? (
-          <>
-            <button onClick={handleSkip}>Skip</button>
-            <button onClick={handleNext}>Next</button>
-          </>
-        ) : (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
-      </div>
-      <div className="progress-bar">
-        <div
-          className="progress"
-          style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        {steps.map(step => (
+          <div key={step.name} className="form-step">
+            <label>{step.label}</label>
+            {renderStep(step)}
+          </div>
+        ))}
+        <div className="form-buttons">
+          <button type="submit">Submit</button>
+        </div>
+      </form>
     </div>
   );
 };

@@ -1,0 +1,89 @@
+.help-support-form {
+    width: 80%;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #f4f7f8;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .website-info h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .website-info p {
+    font-size: 16px;
+    color: #34495e;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
+  .contact-details {
+    margin-top: 30px;
+  }
+  
+  .contact-details h3 {
+    font-size: 24px;
+    color: #2980b9;
+    margin-bottom: 20px;
+  }
+  
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .team-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .team-card:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .team-card h4 {
+    font-size: 20px;
+    color: #34495e;
+    margin-bottom: 10px;
+  }
+  
+  .team-card p {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-bottom: 8px;
+  }
+  
+  .extra-info {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .extra-info h3 {
+    font-size: 24px;
+    color: #2980b9;
+    margin-bottom: 10px;
+  }
+  
+  .extra-info p {
+    font-size: 16px;
+    color: #34495e;
+  }
+  
+  a {
+    color: #3498db;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+  

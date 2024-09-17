@@ -1,36 +1,32 @@
 import React, { useState } from 'react';
 import './EntrepreneurForm.css';
-import { useNavigate ,useLocation} from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const EntrepreneurForm = () => {
   const navigate = useNavigate();
   const location = useLocation();
-    const { userType, firstname, lastname, username, email , password } = location.state;
-  const steps = [
+  const { userType, firstname, lastname, username, email, password } = location.state;
+
+  // Fields for the Entrepreneur form
+  const fields = [
     { name: 'companyName', label: 'Company Name', type: 'text', optional: false },
     { name: 'foundedDate', label: 'Founded Date', type: 'date', optional: false },
     { name: 'teamSize', label: 'Team Size', type: 'number', optional: false },
     { name: 'industry', label: 'Industry', type: 'text', optional: false },
     { name: 'stage', label: 'Stage', type: 'select', options: ['Idea', 'Prototype', 'Early Stage', 'Growth', 'Mature'], optional: false },
-    { name: 'pitchDeck', label: 'Pitch Deck', type: 'file', optional: true },
-    { name: 'bio', label: 'Bio', type: 'textarea', optional: true },
-    { name: 'location', label: 'Location', type: 'text', optional: true },
-    { name: 'website', label: 'Website', type: 'text', optional: true },
-    { name: 'linkedin', label: 'LinkedIn', type: 'text', optional: true },
-    { name: 'github', label: 'GitHub', type: 'text', optional: true },
-    { name: 'twitter', label: 'Twitter', type: 'text', optional: true }
+    { name: 'pitchDeck', label: 'Pitch Deck (Optional)', type: 'file', optional: true },
+    { name: 'bio', label: 'Bio (Optional)', type: 'textarea', optional: true },
+    { name: 'location', label: 'Location (Optional)', type: 'text', optional: true },
+    { name: 'website', label: 'Website (Optional)', type: 'text', optional: true },
+    { name: 'linkedin', label: 'LinkedIn (Optional)', type: 'text', optional: true },
+    { name: 'github', label: 'GitHub (Optional)', type: 'text', optional: true },
+    { name: 'twitter', label: 'Twitter (Optional)', type: 'text', optional: true },
   ];
 
-  const [currentStep, setCurrentStep] = useState(0);
   const [formData, setFormData] = useState({});
 
-  const handleNext = () => {
-    if (currentStep < steps.length - 1) {
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
   const handleSubmit = () => {
+    // Log the collected information
     console.log('All Information:', {
       userType,
       firstname,
@@ -38,80 +34,57 @@ const EntrepreneurForm = () => {
       username,
       email,
       password,
-      ...formData
-  });
-  navigate('/MainPage');
-  };
-
-  const handleSkip = () => {
-    handleNext();
+      ...formData,
+    });
+    // Redirect to the main page after submission
+    navigate('/MainPage');
   };
 
   const handleChange = (e) => {
-    const { name, type, files, value, checked } = e.target;
+    const { name, type, files, value } = e.target;
     if (type === 'file') {
       setFormData({
         ...formData,
-        [name]: files[0]
-      });
-    } else if (type === 'checkbox') {
-      setFormData({
-        ...formData,
-        [name]: checked
+        [name]: files[0],
       });
     } else {
       setFormData({
         ...formData,
-        [name]: value
+        [name]: value,
       });
-    }
-  };
-
-  const renderStep = () => {
-    const step = steps[currentStep];
-    switch (step.type) {
-      case 'textarea':
-        return <textarea name={step.name} value={formData[step.name] || ''} onChange={handleChange} />;
-      case 'select':
-        return (
-          <select name={step.name} value={formData[step.name] || ''} onChange={handleChange}>
-            <option value="">-- Select --</option>
-            {step.options.map(option => (
-              <option key={option} value={option}>{option}</option>
-            ))}
-          </select>
-        );
-      case 'checkbox':
-        return <input type="checkbox" name={step.name} checked={formData[step.name] || false} onChange={handleChange} />;
-      case 'file':
-        return <input type="file" name={step.name} onChange={handleChange} />;
-      default:
-        return <input type={step.type} name={step.name} value={formData[step.name] || ''} onChange={handleChange} />;
     }
   };
 
   return (
     <div className="entrepreneur-form">
       <h2>Entrepreneur Information</h2>
-      <div className="form-step">
-        <label>{steps[currentStep].label}</label>
-        {renderStep()}
-      </div>
+      {/* Render all input fields on the same page */}
+      {fields.map((field, index) => (
+        <div className="form-step" key={index}>
+          <label>{field.label}</label>
+          {field.type === 'textarea' ? (
+            <textarea name={field.name} value={formData[field.name] || ''} onChange={handleChange} />
+          ) : field.type === 'select' ? (
+            <select name={field.name} value={formData[field.name] || ''} onChange={handleChange}>
+              <option value="">-- Select --</option>
+              {field.options.map(option => (
+                <option key={option} value={option}>{option}</option>
+              ))}
+            </select>
+          ) : (
+            <input
+              type={field.type}
+              name={field.name}
+              value={formData[field.name] || ''}
+              onChange={handleChange}
+              accept={field.type === 'file' ? '.pdf' : null}
+            />
+          )}
+        </div>
+      ))}
+      {/* Submit Button */}
       <div className="form-buttons">
-        {currentStep < steps.length - 1 ? (
-          <>
-            <button onClick={handleSkip}>Skip</button>
-            <button onClick={handleNext}>Next</button>
-          </>
-        ) : (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
-      </div>
-      <div className="progress-bar">
-        <div
-          className="progress"
-          style={{ width: `${((currentStep + 1) / steps.length) * 100}%` }}
-        />
+        <button onClick={handleSubmit}>Submit</button>
       </div>
     </div>
   );
